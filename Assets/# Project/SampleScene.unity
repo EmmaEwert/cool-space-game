@@ -830,4 +830,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7896711583673122098, guid: 52abb5677a35b504fbd96e53c1516828,
     type: 3}
+  ghostPrefab: {fileID: 1980397066457259865, guid: 845c25c03d7a1eb47be293a24153ea20,
+    type: 3}
+  playerDeathEvent: {fileID: 11400000, guid: c30db815a3d9f7449adf89f37f20640b, type: 2}
   model: {fileID: 814309932}

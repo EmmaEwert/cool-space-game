@@ -20,7 +20,7 @@ public class Asteroid : MonoBehaviour {
 		var colliders = Physics.OverlapSphere(model.position, model.localScale.x * 0.5f);
 		foreach (var collider in colliders) {
 			if (collider.GetComponentInParent<Bullet>()) {
-				Destroy(collider.gameObject);
+				Destroy(collider.transform.parent.gameObject);
 				Destroy(gameObject);
 				break;
 			}

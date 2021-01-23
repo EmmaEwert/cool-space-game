@@ -1,16 +1,25 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 	private const float Speed = 75f;
 
 	[Header("Assets")]
 	public GameObject bulletPrefab;
+	public GhostController ghostPrefab;
+	public GameEvent playerDeathEvent;
 
 	[Header("References")]
 	public Transform model;
 
 	private new Camera camera => Camera.main;
 	private float phase;
+	private List<Snapshot> snapshots = new List<Snapshot>();
+	private float timestamp;
+
+	private void Start() {
+		timestamp = Time.time;
+	}
 
 	private void Update() {
 		var input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -29,21 +38,41 @@ public class PlayerController : MonoBehaviour {
 			var normalizedPosition = (Input.mousePosition - new Vector3(0.5f * Screen.width, 0.5f * Screen.height, 0f)).normalized;
 			var angle = Vector2.SignedAngle(Vector2.up, normalizedPosition);
 			Instantiate(bulletPrefab, transform.position, transform.rotation * Quaternion.Euler(0f, 0f, angle));
+			snapshots.Add(new Snapshot {
+				timestamp = Time.time - timestamp,
+				rotation = transform.rotation,
+				fireRotation = transform.rotation * Quaternion.Euler(0f, 0f, angle),
+				death = false,
+			});
 		} else {
 			phase -= Time.deltaTime;
 		}
 
+
 		var colliders = Physics.OverlapSphere(model.position, model.localScale.x * 0.5f);
 		foreach (var collider in colliders) {
 			if (collider.GetComponentInParent<Asteroid>()) {
-				Destroy(collider.gameObject);
-				Destroy(gameObject);
-				break;
+				snapshots.Add(new Snapshot {
+					timestamp = Time.time - timestamp,
+					rotation = transform.rotation,
+					fireRotation = Quaternion.identity,
+					death = true
+				});
+				var ghost = Instantiate(ghostPrefab, Vector3.zero, Quaternion.identity);
+				ghost.snapshots = snapshots;
+				snapshots = new List<Snapshot>();
+				transform.rotation = Quaternion.identity;
+				playerDeathEvent.Raise();
+				timestamp = Time.time;
+				return;
 			}
 		}
-	}
 
-	private void OnDestroy() {
-		Instantiate(gameObject, Vector3.zero, Quaternion.identity);
+		snapshots.Add(new Snapshot {
+			timestamp = Time.time - timestamp,
+			rotation = transform.rotation,
+			fireRotation = Quaternion.identity,
+			death = false
+		});
 	}
 }
