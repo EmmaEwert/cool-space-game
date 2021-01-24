@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
 	private const float Speed = 75f;
@@ -85,5 +86,12 @@ public class PlayerController : MonoBehaviour {
 			fireRotation = Quaternion.identity,
 			death = false
 		});
+
+
+		// main menu check
+		if(Input.GetKeyDown(KeyCode.Escape)){
+			SceneManager.LoadScene("main menu", LoadSceneMode.Single);
+		}
+
 	}
 }
