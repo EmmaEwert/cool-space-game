@@ -734,7 +734,9 @@ MonoBehaviour:
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
-  m_AfterStackBundles: []
+  m_AfterStackBundles:
+  - assemblyQualifiedName: Sable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
 --- !u!1 &981754671
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,7 +830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0147eb97b84ca9408cf7b8ecf57059a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletPrefab: {fileID: 7896711583673122098, guid: 52abb5677a35b504fbd96e53c1516828,
+  bulletPrefab: {fileID: 8287590175716480623, guid: 52abb5677a35b504fbd96e53c1516828,
     type: 3}
   ghostPrefab: {fileID: 1980397066457259865, guid: 845c25c03d7a1eb47be293a24153ea20,
     type: 3}

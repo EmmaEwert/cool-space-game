@@ -4,6 +4,8 @@ public class Bullet : MonoBehaviour {
 	private const float Speed = 100f;
 	private const float Lifetime = 2f;
 
+	public float speed;
+
 	private float life;
 
 	public void OnPlayerDeath() {
@@ -11,7 +13,7 @@ public class Bullet : MonoBehaviour {
 	}
 
 	private void Update() {
-		transform.Rotate(Time.deltaTime * Speed, 0f, 0f, Space.Self);
+		transform.Rotate(Time.deltaTime * Speed + Time.deltaTime * speed, 0f, 0f, Space.Self);
 		life += Time.deltaTime;
 		if (life >= Lifetime) {
 			Destroy(gameObject);
