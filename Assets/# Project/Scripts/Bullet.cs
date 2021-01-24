@@ -5,6 +5,7 @@ public class Bullet : MonoBehaviour {
 	private const float Lifetime = 2f;
 
 	public float speed;
+	public bool dontDestroy = false;
 
 	private float life;
 
@@ -16,7 +17,7 @@ public class Bullet : MonoBehaviour {
 		transform.Rotate(Time.deltaTime * Speed + Time.deltaTime * speed, 0f, 0f, Space.Self);
 		life += Time.deltaTime;
 		if (life >= Lifetime) {
-			Destroy(gameObject);
+			if(!dontDestroy) Destroy(gameObject);
 		}
 	}
 }

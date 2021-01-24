@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/# Project/scenarios/main menu.unity
+    guid: df7a94e87aa159a4d9a4af227116284e
+  - enabled: 1
+    path: Assets/# Project/scenarios/polar pulser.unity
+    guid: 958708222f4d2b64f9c46a7d14dfd439
+  - enabled: 1
+    path: Assets/# Project/scenarios/danger zone.unity
+    guid: 875ce663a672114419570cb828a17fe2
   m_configObjects: {}
