@@ -866,9 +866,15 @@ MonoBehaviour:
   speed: 3.333
   movePattern:
   - eulerAngle: {x: 0, y: 0, z: 0}
-  - eulerAngle: {x: 10, y: 0, z: 0}
-  - eulerAngle: {x: 10, y: 10, z: 0}
-  - eulerAngle: {x: 0, y: 10, z: 0}
+  - eulerAngle: {x: 30, y: 0, z: 0}
+  - eulerAngle: {x: 30, y: 30, z: 0}
+  - eulerAngle: {x: 0, y: 30, z: 0}
+  - eulerAngle: {x: 0, y: 30, z: 0}
+  - eulerAngle: {x: 0, y: 30, z: 0}
+  - eulerAngle: {x: 0, y: 30, z: 0}
+  - eulerAngle: {x: 0, y: 30, z: 0}
+  - eulerAngle: {x: 0, y: 30, z: 0}
+  - eulerAngle: {x: 0, y: 30, z: 0}
   moveInLoop: 1
 --- !u!4 &1469751289
 Transform:
@@ -932,6 +938,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7896711583673122098, guid: 52abb5677a35b504fbd96e53c1516828,
     type: 3}
+  ghostPrefab: {fileID: 0}
+  playerDeathEvent: {fileID: 0}
   model: {fileID: 814309932}
 --- !u!1001 &2060179661
 PrefabInstance:
