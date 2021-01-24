@@ -17,10 +17,12 @@ public class PlayerController : MonoBehaviour {
 	private List<Snapshot> snapshots = new List<Snapshot>();
 	private float timestamp;
 	private Vector3 lastPosition;
+	private Quaternion startRotation;
 
 	private void Start() {
 		timestamp = Time.time;
 		lastPosition = model.position;
+		startRotation = transform.rotation;
 	}
 
 	private void Update() {
@@ -69,7 +71,8 @@ public class PlayerController : MonoBehaviour {
 				var ghost = Instantiate(ghostPrefab, Vector3.zero, Quaternion.identity);
 				ghost.snapshots = snapshots;
 				snapshots = new List<Snapshot>();
-				transform.rotation = Quaternion.identity;
+				//transform.rotation = Quaternion.identity;
+				transform.rotation = startRotation;
 				playerDeathEvent.Raise();
 				timestamp = Time.time;
 				return;
