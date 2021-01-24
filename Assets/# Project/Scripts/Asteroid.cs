@@ -1,13 +1,14 @@
 ﻿using UnityEngine;
 
 public class Asteroid : MonoBehaviour {
-	private const float MinSpeed = 3f;
-	private const float MaxSpeed = 5f;
+	private const float MinSpeed = 24f;
+	private const float MaxSpeed = 32f;
 
 	[Header("References")]
 	public Transform model;
 
 	private float speed;
+	private float health = 4;
 
 	private void Start() {
 		transform.Rotate(0f, 0f, Random.Range(0f, 2f * Mathf.PI) * Mathf.Rad2Deg, Space.Self);
@@ -21,8 +22,10 @@ public class Asteroid : MonoBehaviour {
 		foreach (var collider in colliders) {
 			if (collider.GetComponentInParent<Bullet>()) {
 				Destroy(collider.transform.parent.gameObject);
-				Destroy(gameObject);
-				break;
+				if (--health <= 0) {
+					Destroy(gameObject);
+					break;
+				}
 			}
 		}
 	}

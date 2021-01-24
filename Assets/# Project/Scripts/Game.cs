@@ -16,7 +16,7 @@ public class Game : MonoBehaviour {
 		asteroids.Clear();
 		var rotation = Quaternion.Euler(45f, 0f, 0f);
 		Random.InitState(1);
-		for (var i = 0; i < 16; ++i) {
+		for (var i = 0; i < 64; ++i) {
 			var deltaRotation = Quaternion.Euler(Random.Range(-15f, 15f), Random.Range(-15f, 15f), 0f);
 			var asteroid = Instantiate(asteroidPrefab, transform.position, rotation * deltaRotation);
 			asteroids.Add(asteroid);
