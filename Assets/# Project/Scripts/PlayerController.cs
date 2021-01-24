@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour {
 
 		// Bullets
 		if (phase <= 0f && Input.GetButton("Fire1")) {
-			phase = 0.25f;
+			phase = 0.1f;
 			var normalizedPosition = (Input.mousePosition - new Vector3(0.5f * Screen.width, 0.5f * Screen.height, 0f)).normalized;
 			var angle = Vector2.SignedAngle(Vector2.up, normalizedPosition);
 			Instantiate(bulletPrefab, transform.position, transform.rotation * Quaternion.Euler(0f, 0f, angle));

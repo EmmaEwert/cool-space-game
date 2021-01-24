@@ -6,6 +6,10 @@ public class Bullet : MonoBehaviour {
 
 	private float life;
 
+	public void OnPlayerDeath() {
+		Destroy(gameObject);
+	}
+
 	private void Update() {
 		transform.Rotate(Time.deltaTime * Speed, 0f, 0f, Space.Self);
 		life += Time.deltaTime;

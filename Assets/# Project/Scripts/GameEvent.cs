@@ -14,7 +14,9 @@ public class GameEvent : ScriptableObject {
 	}
 
 	public void Raise() {
-		foreach (var listener in listeners) {
+		var copy = new GameEventListener[listeners.Count];
+		listeners.CopyTo(copy);
+		foreach (var listener in copy) {
 			listener.onRaise.Invoke();
 		}
 	}
