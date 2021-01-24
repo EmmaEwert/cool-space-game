@@ -5,6 +5,7 @@ using UnityEngine;
 public class Game : MonoBehaviour {
 	[Header("Assets")]
 	public GameObject asteroidPrefab;
+	public GameObject warningPrefab;
 	public GameEvent newLifeEvent;
 	private List<GameObject> asteroids = new List<GameObject>();
 
@@ -23,11 +24,28 @@ public class Game : MonoBehaviour {
 	}
 
 	private void Start() {
+		SetupWarnings();
 		OnPlayerDeath();
 	}
 
 	private void Update(){
 		CheckForNextAsteroidWave();
+	}
+
+
+	private void SetupWarnings(){
+		//foreach (AsteroidWave item in waves){}{
+		for(int i=0;i<waves.Count;i++){
+			var item = waves[i];
+			var rotation = Quaternion.Euler(item.eulerOrigin);
+
+			//why is this null?
+			item.warningIndicator = Instantiate(warningPrefab, transform.position, rotation);
+			// its because struct is a data object and not a class object
+			// or something
+			waves[i] = item;
+
+		}
 	}
 
 
@@ -40,15 +58,32 @@ public class Game : MonoBehaviour {
         public Vector3 eulerOrigin;
 		public int quantity;
 		public float time;
+		[HideInInspector]
+		public GameObject warningIndicator;
     }
 
 	private bool CheckForNextAsteroidWave(){
 		
+		//check for incoming warnings first
+		for(int i=0;i<waves.Count;i++){
+			
+			var wave = waves[i];
+			float timeUntilSpawn = (Time.time - waveStartTime) - wave.time;
+			bool comingSoon = timeUntilSpawn < 1;
+			bool hasAppeared = timeUntilSpawn < -2;
+			
+			//im sleepy and this works
+			wave.warningIndicator.SetActive(comingSoon && !hasAppeared);
+
+		}
+
+
+
 		// dont even think about out of bounds exception
 		if(numWavesSpawned == waves.Count) return false;
 		
-		AsteroidWave wave = waves[numWavesSpawned];
-		if(wave.time < Time.time - waveStartTime){
+		AsteroidWave nextWave = waves[numWavesSpawned];
+		if(nextWave.time < Time.time - waveStartTime){
 			NextAsteroidWave();
 			return true;
 		}

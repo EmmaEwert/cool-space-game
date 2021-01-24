@@ -17,7 +17,7 @@ public class LinearAsteroid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(startPoint * -speed * Time.deltaTime);
+        transform.Translate(startPoint.normalized * -speed * Time.deltaTime);
         if (Vector3.Dot(startPoint, transform.position) < 0){
             obstacle.SetActive(false);
         }
