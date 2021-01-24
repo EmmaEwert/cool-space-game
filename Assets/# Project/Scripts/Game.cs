@@ -5,7 +5,7 @@ using UnityEngine;
 public class Game : MonoBehaviour {
 	[Header("Assets")]
 	public GameObject asteroidPrefab;
-
+	public GameEvent newLifeEvent;
 	private List<GameObject> asteroids = new List<GameObject>();
 
 	public void OnPlayerDeath() {
@@ -17,6 +17,8 @@ public class Game : MonoBehaviour {
 		numWavesSpawned = 0;
 		waveStartTime = Time.time;
 		NextAsteroidWave();
+
+		newLifeEvent.Raise();
 		
 	}
 
