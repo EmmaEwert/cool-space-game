@@ -2,7 +2,7 @@
 
 public class Bullet : MonoBehaviour {
 	private const float Speed = 100f;
-	private const float Lifetime = 10f;
+	private const float Lifetime = 2f;
 
 	private float life;
 
