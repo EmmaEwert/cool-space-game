@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour {
 
 		var colliders = Physics.OverlapSphere(model.position, model.localScale.x * 0.5f);
 		foreach (var collider in colliders) {
-			if (collider.GetComponentInParent<Asteroid>()) {
+			if (collider.GetComponentInParent<CanKillPlayer>()) {
 				snapshots.Add(new Snapshot {
 					timestamp = Time.time - timestamp,
 					rotation = transform.rotation,
