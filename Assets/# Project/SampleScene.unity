@@ -564,6 +564,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroidPrefab: {fileID: 5734672431990467585, guid: e02c899da565eb34fa3f5d88849d7343,
     type: 3}
+  waveStartTime: 0
+  numWavesSpawned: 0
+  waves:
+  - eulerOrigin: {x: 45, y: 0, z: 0}
+    quantity: 64
+    time: 0
+  - eulerOrigin: {x: 45, y: 0, z: 0}
+    quantity: 5
+    time: 3
+  - eulerOrigin: {x: 45, y: 30, z: 0}
+    quantity: 5
+    time: 3
+  - eulerOrigin: {x: 0, y: 30, z: 0}
+    quantity: 5
+    time: 10
 --- !u!114 &887556700
 MonoBehaviour:
   m_ObjectHideFlags: 0

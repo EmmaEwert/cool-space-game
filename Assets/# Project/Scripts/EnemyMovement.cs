@@ -33,6 +33,7 @@ public class EnemyMovement : MonoBehaviour
     }
 
     private void IterateMovement(){
+
         int nextPoint = movingForward ? stepIndex + 1 : stepIndex - 1;
 
         if(nextPoint == -1) {
@@ -53,10 +54,6 @@ public class EnemyMovement : MonoBehaviour
         if(true){
             this.transform.rotation = Quaternion.Euler(pointAlongPath);
             stepProgress += Time.deltaTime * speed / distance;
-
-            Debug.Log(distance);
-            Debug.Log(stepProgress);
-
             if(stepProgress > 1){
                 stepProgress = 0;
                 stepIndex = nextPoint;

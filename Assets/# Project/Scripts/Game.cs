@@ -14,16 +14,56 @@ public class Game : MonoBehaviour {
 			asteroids.RemoveAt(0);
 		}
 		asteroids.Clear();
-		var rotation = Quaternion.Euler(45f, 0f, 0f);
-		Random.InitState(1);
-		for (var i = 0; i < 64; ++i) {
-			var deltaRotation = Quaternion.Euler(Random.Range(-15f, 15f), Random.Range(-15f, 15f), 0f);
-			var asteroid = Instantiate(asteroidPrefab, transform.position, rotation * deltaRotation);
-			asteroids.Add(asteroid);
-		}
+		numWavesSpawned = 0;
+		waveStartTime = Time.time;
+		NextAsteroidWave();
+		
 	}
 
 	private void Start() {
 		OnPlayerDeath();
+	}
+
+	private void Update(){
+		CheckForNextAsteroidWave();
+	}
+
+
+	public float waveStartTime;
+	public int numWavesSpawned = 0;
+	public List<AsteroidWave> waves;
+	[System.Serializable]
+    public struct AsteroidWave
+    {
+        public Vector3 eulerOrigin;
+		public int quantity;
+		public float time;
+    }
+
+	private bool CheckForNextAsteroidWave(){
+		
+		// dont even think about out of bounds exception
+		if(numWavesSpawned == waves.Count) return false;
+		
+		AsteroidWave wave = waves[numWavesSpawned];
+		if(wave.time < Time.time - waveStartTime){
+			NextAsteroidWave();
+			return true;
+		}
+		return false;
+	}
+
+	private void NextAsteroidWave(){
+
+		AsteroidWave wave = waves[numWavesSpawned];
+		
+		var rotation = Quaternion.Euler(wave.eulerOrigin);
+		Random.InitState(1);
+		for (var i = 0; i < wave.quantity; ++i) {
+			var deltaRotation = Quaternion.Euler(Random.Range(-15f, 15f), Random.Range(-15f, 15f), 0f);
+			var asteroid = Instantiate(asteroidPrefab, transform.position, rotation * deltaRotation);
+			asteroids.Add(asteroid);
+		}
+		numWavesSpawned++;
 	}
 }
